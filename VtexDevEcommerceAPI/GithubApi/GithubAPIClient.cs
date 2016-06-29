@@ -16,6 +16,7 @@ namespace VtexDevEcommerceAPI.GithubApi
     public class GithubAPIClient
     {
         HttpWebRequest req;
+        string url = "https://api.github.com/";
 
         private void CreateRequest(string url)
         {
@@ -26,7 +27,23 @@ namespace VtexDevEcommerceAPI.GithubApi
 
         public IEnumerable<User> GetAllUsers()
         {
-            CreateRequest("https://api.github.com/users");
+            string jsonResponse = GetResponse( url + "users");
+            
+            return JsonConvert.DeserializeObject<IEnumerable<User>>(jsonResponse);
+        }
+
+
+        public User GetUser(string Id)
+        {
+            string jsonResponse = GetResponse( url + "user/" + Id);
+            
+            return JsonConvert.DeserializeObject<User>(jsonResponse);
+        }
+
+        private string GetResponse(string url)
+        {
+            CreateRequest(url);
+
             string jsonResponse;
             try
             {
@@ -37,10 +54,8 @@ namespace VtexDevEcommerceAPI.GithubApi
             {
                 throw ex;
             }
-
-            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-            
-            return JsonConvert.DeserializeObject<IEnumerable<User>>(jsonResponse);
+            return jsonResponse;
         }
+
     }
 }
