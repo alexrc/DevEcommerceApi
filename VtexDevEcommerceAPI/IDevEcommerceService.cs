@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using VtexDevEcommerceAPI;
-using VtexDevEcommerceAPI.Entities;
+using DevEcommerceAPI;
+using DevEcommerceAPI.DataContracts;
 
 
-namespace VtexDevEcommerceAPI
+namespace DevEcommerceAPI
 {
     [ServiceContract]
     public interface IDevEcommerceService
@@ -17,8 +17,8 @@ namespace VtexDevEcommerceAPI
                    ResponseFormat = WebMessageFormat.Json,
                     RequestFormat = WebMessageFormat.Json,
                         BodyStyle = WebMessageBodyStyle.Wrapped,
-                      UriTemplate = "GetUser/{id}")]
-        User GetUser(string id);
+                      UriTemplate = "GetDeveloper/{id}")]
+        Developer GetDeveloperById(string id);
 
 
         [OperationContract]
@@ -26,7 +26,15 @@ namespace VtexDevEcommerceAPI
            ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Wrapped,
-              UriTemplate = "GetUsers")]
-        IEnumerable<User> GetUsers();
+              UriTemplate = "GetDevelopers")]
+        IEnumerable<Developer> GetDevelopers();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+           ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json,
+                BodyStyle = WebMessageBodyStyle.Wrapped,
+              UriTemplate = "CalculateDevPrice")]
+        string CalculateDevPrice();
     }
 }

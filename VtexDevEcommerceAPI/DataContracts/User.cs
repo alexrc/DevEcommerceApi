@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace VtexDevEcommerceAPI.Entities
+namespace DevEcommerceAPI.DataContracts
 {
-    public class User
+    public class Developer
     {
         public string login { get; set; }
 
@@ -41,5 +41,30 @@ namespace VtexDevEcommerceAPI.Entities
         public string type { get; set; }
 
         public bool site_admin { get; set; }
+
+        public string name { get; set; }
+
+        public string company { get; set; }
+
+        public string blog { get; set; }
+
+        public string location { get; set; }
+
+        public string email { get; set; }
+
+        public string hireable { get; set; }
+
+        public string bio { get; set; }
+
+        public string public_repos { get; set; }
+
+        public string followers { get; set; }
+
+        public string following { get; set; }
+
+        public string created_at { get; set; }
+
+        public string updated_at { get; set; }
+        
     }
 }

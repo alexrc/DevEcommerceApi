@@ -9,14 +9,15 @@ using System.IO;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using System.Collections;
-using VtexDevEcommerceAPI.Entities;
+using DevEcommerceAPI.DataContracts;
 
-namespace VtexDevEcommerceAPI.GithubApi
+namespace DevEcommerceAPI.GithubApi
 {
     public class GithubAPIClient
     {
         HttpWebRequest req;
-        string url = "https://api.github.com/";
+        string githubAPIbaseUrl = "https://api.github.com/";
+        string jsonResponse;
 
         private void CreateRequest(string url)
         {
@@ -25,19 +26,25 @@ namespace VtexDevEcommerceAPI.GithubApi
             req.UserAgent = "VTex_Test";
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<Developer> GetDevelopers()
         {
-            string jsonResponse = GetResponse( url + "users");
+            jsonResponse = GetResponse( githubAPIbaseUrl + "users");
             
-            return JsonConvert.DeserializeObject<IEnumerable<User>>(jsonResponse);
+            return JsonConvert.DeserializeObject<IEnumerable<Developer>>(jsonResponse);
         }
 
-
-        public User GetUser(string Id)
+        public Developer GetDeveloperById(string Id)
         {
-            string jsonResponse = GetResponse( url + "user/" + Id);
+            jsonResponse = GetResponse(githubAPIbaseUrl + "user/" + Id);
             
-            return JsonConvert.DeserializeObject<User>(jsonResponse);
+            return JsonConvert.DeserializeObject<Developer>(jsonResponse);
+        }
+
+        public Developer GetDeveloperDetails(string devLogin)
+        {
+            jsonResponse = GetResponse(githubAPIbaseUrl + "user/" + devLogin);
+
+            return JsonConvert.DeserializeObject<Developer>(jsonResponse);
         }
 
         private string GetResponse(string url)
@@ -56,6 +63,6 @@ namespace VtexDevEcommerceAPI.GithubApi
             }
             return jsonResponse;
         }
-
+                
     }
 }

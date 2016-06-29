@@ -3,21 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using VtexDevEcommerceAPI.Entities;
-using VtexDevEcommerceAPI.GithubApi;
+using DevEcommerceAPI.GithubApi;
+using DevEcommerceAPI.DataContracts;
 
-namespace VtexDevEcommerceAPI
+namespace DevEcommerceAPI
 {
     public class DevEcommerceService : IDevEcommerceService
     {
-        public User GetUser(string id)
+        public Developer GetDeveloperById(string id)
         {
-            return new GithubAPIClient().GetUser(id);
+            return new GithubAPIClient().GetDeveloperById(id);
         }
 
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<Developer> GetDevelopers()
         {
-            return new GithubAPIClient().GetAllUsers();
+            return new GithubAPIClient().GetDevelopers();
+        }
+
+        public string CalculateDevPrice(string devLogin)
+        {
+            GithubAPIClient githubAPIClient = new GithubAPIClient();
+
+            Developer user = githubAPIClient.GetDeveloperById(devLogin);
+
+            int followersCount = int.Parse(user.followers);
+            int repositoriesCount = int.Parse(user.public_repos);
+
+
+            return null;
         }
     }
 }
