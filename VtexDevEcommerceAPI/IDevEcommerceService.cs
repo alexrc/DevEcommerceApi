@@ -17,8 +17,8 @@ namespace DevEcommerceAPI
                    ResponseFormat = WebMessageFormat.Json,
                     RequestFormat = WebMessageFormat.Json,
                         BodyStyle = WebMessageBodyStyle.Wrapped,
-                      UriTemplate = "GetDeveloper/{id}")]
-        Developer GetDeveloperById(string id);
+                      UriTemplate = "GetDeveloperByLogin/{login}")]
+        Developer GetDeveloperByLogin(string login);
 
 
         [OperationContract]
@@ -26,15 +26,15 @@ namespace DevEcommerceAPI
            ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Wrapped,
-              UriTemplate = "GetDevelopers")]
-        IEnumerable<Developer> GetDevelopers();
+              UriTemplate = "/GetDevelopers?Page={page}&perPage={perPage}")]
+        IEnumerable<Developer> GetDevelopers(int page, int perPage);
 
         [OperationContract]
         [WebInvoke(Method = "GET",
            ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Wrapped,
-              UriTemplate = "CalculateDevPrice")]
-        string CalculateDevPrice();
+              UriTemplate = "CalculateDevPrice/{devLogin}")]
+        string CalculateDevPrice(string devLogin);
     }
 }

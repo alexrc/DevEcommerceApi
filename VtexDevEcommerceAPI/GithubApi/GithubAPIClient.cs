@@ -26,9 +26,14 @@ namespace DevEcommerceAPI.GithubApi
             req.UserAgent = "VTex_Test";
         }
 
-        public IEnumerable<Developer> GetDevelopers()
+        public IEnumerable<Developer> GetDevelopers(int page, int perPage)
         {
-            jsonResponse = GetResponse( githubAPIbaseUrl + "users");
+            string url = githubAPIbaseUrl + "users";
+
+            url += page > 0 ? "?page=" + page.ToString() : perPage > 0 ? "?per_page=" + perPage.ToString() : string.Empty;
+            url += page > 0 && perPage > 0 ? "&per_page=" + perPage.ToString() : string.Empty;
+
+            jsonResponse = GetResponse(url);
             
             return JsonConvert.DeserializeObject<IEnumerable<Developer>>(jsonResponse);
         }
@@ -40,9 +45,9 @@ namespace DevEcommerceAPI.GithubApi
             return JsonConvert.DeserializeObject<Developer>(jsonResponse);
         }
 
-        public Developer GetDeveloperDetails(string devLogin)
+        public Developer GetDeveloperByLogin(string devLogin)
         {
-            jsonResponse = GetResponse(githubAPIbaseUrl + "user/" + devLogin);
+            jsonResponse = GetResponse(githubAPIbaseUrl + "users/" + devLogin);
 
             return JsonConvert.DeserializeObject<Developer>(jsonResponse);
         }

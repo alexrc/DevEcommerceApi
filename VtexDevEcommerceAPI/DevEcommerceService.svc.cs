@@ -10,14 +10,14 @@ namespace DevEcommerceAPI
 {
     public class DevEcommerceService : IDevEcommerceService
     {
-        public Developer GetDeveloperById(string id)
+        public Developer GetDeveloperByLogin(string login)
         {
-            return new GithubAPIClient().GetDeveloperById(id);
+            return new GithubAPIClient().GetDeveloperByLogin(login);
         }
 
-        public IEnumerable<Developer> GetDevelopers()
+        public IEnumerable<Developer> GetDevelopers(int page, int perPage)
         {
-            return new GithubAPIClient().GetDevelopers();
+            return new GithubAPIClient().GetDevelopers(page,perPage);
         }
 
         public string CalculateDevPrice(string devLogin)
@@ -30,7 +30,7 @@ namespace DevEcommerceAPI
             int repositoriesCount = int.Parse(user.public_repos);
 
 
-            return null;
+            return (followersCount + repositoriesCount).ToString();
         }
     }
 }
