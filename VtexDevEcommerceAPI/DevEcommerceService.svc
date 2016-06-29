@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="VtexDevEcommerceAPI.DevEcommerceService" CodeBehind="DevEcommerceService.svc.cs" %>
